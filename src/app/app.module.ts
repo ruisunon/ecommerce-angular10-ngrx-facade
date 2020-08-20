@@ -1,4 +1,4 @@
-import { AboutComponent } from './feature-modules/about/about.component';
+import { AboutComponent } from './modules/about/about.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AbstractContainerComponent } from './shared/components/abstract-container/abstract-container.component';
-import { HomeComponent } from './feature-modules/home/home.component';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
   declarations: [
