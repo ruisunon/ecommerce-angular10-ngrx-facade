@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary">
   <h1>
     Invoice Master
@@ -8,3 +9,6 @@
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+
+<h1 [innerHTML]="title | markdown"></h1>
+<div [innerHTML]="content | markdown"></div>

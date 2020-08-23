@@ -1,0 +1,15 @@
+{
+     "/**/cms-backend-api/**": {
+         "target":"https://cms-backend-api.aws.com",
+         "secure": false,
+         "logLevel": "debug",
+         "changeOrigin": true
+     },
+     "/api": {
+         "target": "http://127.0.0.1:3000/api",
+         "secure": false,
+         "logLevel": "debug",
+         "changeOrigin": true,
+         "pathRewrite": {"^/api" : ""}
+     }
+}

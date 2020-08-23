@@ -1,17 +1,17 @@
-import { AboutComponent } from './modules/about/about.component';
-import { HomeComponent } from './modules/home/home.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {HomeComponent} from '@general/home/home.component';
+import {AboutComponent} from '@general/about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   {
-    path: 'admin',
+    path: 'general',
     loadChildren: () =>
-      import(`./modules/admin/admin.module`).then((m) => m.AdminModule),
+      import(`./modules/general/general.module`).then((m) => m.GeneralModule),
   },
 ];
 

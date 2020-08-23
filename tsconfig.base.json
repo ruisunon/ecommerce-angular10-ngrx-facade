@@ -15,6 +15,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "resolveJsonModule": true,
+    "paths": {
+      "@env/*":["src/environment/*"],
+      "@shared/*":["src/app/shared/*"],
+      "@step-container/*":["src/app/container/step-container/*"],
+      "@general/*":["src/app/modules/general/*"],
+      "@core/*":["src/app/core/*"],
+      "@models/*":["src/app/models/*"],
+      "@modules/*":["src/app/modules/*"],
+      "@shared-components/*":["src/app/shared/components/*"]
+    }
   }
 }

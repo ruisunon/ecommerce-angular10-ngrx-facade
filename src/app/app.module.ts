@@ -1,10 +1,18 @@
-import { AboutComponent } from './modules/about/about.component';
+import { MarkdownPipe } from './core/pipe/markdown.pipe';
+
+import { SharedModule } from '@shared/shared.module';
+import { GeneralModule } from './modules/general/general.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { StoreRouterConnectingModule} from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {StoreModule} from '@ngrx/store';
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,15 +21,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AbstractContainerComponent } from './shared/components/abstract-container/abstract-container.component';
-import { HomeComponent } from './modules/home/home.component';
+import {EffectsModule} from '@ngrx/effects';
+import {environment} from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    AboutComponent,
-    AbstractContainerComponent,
+    AppComponent,MarkdownPipe
   ],
   imports: [
     BrowserModule,
@@ -35,8 +41,37 @@ import { HomeComponent } from './modules/home/home.component';
     MatDialogModule,
     MatTableModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    StoreModule.forRoot(
+      {},
+      {
+        runtimeChecks: {
+          strictStateImmutability:true,
+          strictActionImmutability:true
+        },
+      }
+    ),
+    StoreDevtoolsModule.instrument({
+      maxAge:25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    !environment.production? StoreDevtoolsModule.instrument() : [],
+    GeneralModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function createTranslateLoader(httpClient:HttpClient){
+  return new TranslateHttpLoader(httpClient, '/assets/i18n/', '.json');
+}
