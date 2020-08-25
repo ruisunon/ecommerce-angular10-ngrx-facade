@@ -17,3 +17,9 @@ export class HttpCancelService {
     return this.cancelPendingRequests$.asObservable()
   }
 }
+
+// Actually, the HttpCancelService stack is perfect, 
+// but the probleme is where it's called. Calling this on navigation end may cause problems if you have child routes.
+
+// So made an abstract container component which call the HttpCancelService when it's destroyed.
+// That way I can manage when I want to cut any Http Cancelling request with more fine grain.

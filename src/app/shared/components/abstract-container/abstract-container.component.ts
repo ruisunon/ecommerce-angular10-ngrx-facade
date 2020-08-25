@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {HttpCancelService} from '@core/service/http-cancel-service/http-cancel.service';
 
 @Component({
   selector: 'app-abstract-container',
-  templateUrl: './abstract-container.component.html',
-  styleUrls: ['./abstract-container.component.scss']
+  template: ` ABSTRACT COMPONENT `,
+  styleUrls: ['./abstract-container.component.scss'],
 })
-export class AbstractContainerComponent implements OnInit {
+export class AbstractContainerComponent implements OnInit, OnDestroy {
+  
+  constructor(protected readonly httpCancelService: HttpCancelService) {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+    this.httpCancelService.cancelPendingRequests();
   }
-
 }

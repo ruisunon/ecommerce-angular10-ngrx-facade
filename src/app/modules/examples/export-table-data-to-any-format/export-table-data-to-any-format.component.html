@@ -1,0 +1,22 @@
+<div>
+	<button mat-raised-button (click)="exporter.exportTable('xlsx',{fileName:'footballers_data'})">Excel</button>
+	<button mat-raised-button (click)="exporter.exportTable('csv',{fileName:'footballers_data'})">CSV</button>
+	<button mat-raised-button (click)="exporter.exportTable('json',{fileName:'footballers_data'})">JSON</button>
+	<button mat-raised-button (click)="exporter.exportTable('txt',{fileName:'footballers_data'})">TEXT</button>
+</div>
+<table mat-table matTableExporter [dataSource] = "dataSource" #exporter="matTableExporter" class = "mat-elevation-z8"> 
+	<ng-container matColumnDef = "playerName">
+	   <th mat-header-cell *matHeaderCellDef>Player Name</th>
+	   <td mat-cell *matCellDef = "let element"> {{element.playerName}} </td>
+	</ng-container>
+	<ng-container matColumnDef = "playerCountry">
+	   <th mat-header-cell *matHeaderCellDef>Player Country</th>
+	   <td mat-cell *matCellDef = "let element"> {{element.playerCountry}} </td>
+	</ng-container>
+	<ng-container matColumnDef = "playerClub">
+	   <th mat-header-cell *matHeaderCellDef>Player Club</th>
+	   <td mat-cell *matCellDef = "let element"> {{element.playerClub}} </td>
+	</ng-container>
+	<tr mat-header-row *matHeaderRowDef = "displayedColumns"></tr>
+	<tr mat-row *matRowDef = "let row; columns: displayedColumns;"></tr>
+ </table>

@@ -5,18 +5,19 @@
 const apiRoot='/v1';
 
 export const environment = {
-  production: false,
-  api: {
-    getAllUsers: {
-      url: apiRoot + '/getAllUsers',
-    },
-    initialDataApi: {
-      url: apiRoot+ '/initialDataApi',
-    },
-    updatePassword: {
-      url: apiRoot+'/updatePassword'
-    }
-  },
-  external_api_url: 'google.com'
-};
+         production: false,
+         api: {
+           getAllUsers: {
+             url: apiRoot + '/getAllUsers',
+           },
+           initialDataApi: {
+             url: apiRoot + '/initialDataApi',
+           },
+           updatePassword: {
+             url: apiRoot + '/updatePassword',
+           },
+         },
+         external_api_url: 'google.com',
+         serverUrl: 'localhost:3000',
+       };
 

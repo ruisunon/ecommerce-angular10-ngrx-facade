@@ -1,3 +1,4 @@
+import { HttpCancelInterceptor } from './core/interceptors/http-cancel-interceptor';
 import { MarkdownPipe } from './core/pipe/markdown.pipe';
 
 import { SharedModule } from '@shared/shared.module';
@@ -12,7 +13,7 @@ import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,12 +24,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from 'src/environments/environment';
+import { JspdfComponent } from './modules/examples/jspdf/jspdf.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,MarkdownPipe
-  ],
+  declarations: [AppComponent, MarkdownPipe, JspdfComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,22 +52,28 @@ import {environment} from 'src/environments/environment';
       {},
       {
         runtimeChecks: {
-          strictStateImmutability:true,
-          strictActionImmutability:true
+          strictStateImmutability: true,
+          strictActionImmutability: true,
         },
       }
     ),
     StoreDevtoolsModule.instrument({
-      maxAge:25,
+      maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-    !environment.production? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     GeneralModule,
-    SharedModule
+    SharedModule,
   ],
-  providers: [],
+  providers: [
+    {
+      multi: true,
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpCancelInterceptor,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
