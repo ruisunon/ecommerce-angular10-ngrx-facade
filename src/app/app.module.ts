@@ -1,4 +1,4 @@
-import { HttpCancelInterceptor } from './core/interceptors/http-cancel-interceptor';
+import { HttpCancelInterceptor } from './core/interceptors/http-cancel.interceptor';
 import { MarkdownPipe } from './core/pipe/markdown.pipe';
 
 import { SharedModule } from '@shared/shared.module';
@@ -25,7 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from 'src/environments/environment';
 import { JspdfComponent } from './modules/examples/jspdf/jspdf.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent, MarkdownPipe, JspdfComponent],
@@ -41,6 +41,7 @@ import { JspdfComponent } from './modules/examples/jspdf/jspdf.component';
     MatDialogModule,
     MatTableModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

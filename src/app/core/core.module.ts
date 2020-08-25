@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RequiredSignDirective } from './required-sign.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [RequiredSignDirective],
   imports: [
     CommonModule
   ]
